@@ -7,15 +7,9 @@ import GoalList from "./src/components/GoalList";
 import GoalInput from "./src/components/GoalInput";
 
 export default function App() {
-  const [enteredGoalText, setEnteredGoalText] = useState<string>("");
   const [courseGoals, setCourseGoals] = useState<Goal[]>([]);
 
-  function handleGoalInput(enteredText: string) {
-    setEnteredGoalText(enteredText);
-  }
-
-  function handleAddGoal() {
-    console.log(enteredGoalText);
+  function handleAddGoal(enteredGoalText: string) {
     setCourseGoals((currentCourseGoals) => [
       ...currentCourseGoals,
       { key: Math.random().toString(), text: enteredGoalText },
@@ -24,7 +18,7 @@ export default function App() {
 
   return (
     <View style={styles.appContainer}>
-      <GoalInput onInput={handleGoalInput} onAddGoal={handleAddGoal} />
+      <GoalInput onAddGoal={handleAddGoal} />
       <View style={styles.goalsContainer}>
         <GoalList courseGoals={courseGoals}/>        
       </View>

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Button,
   GestureResponderEvent,
@@ -7,20 +8,30 @@ import {
 } from "react-native";
 
 const GoalInput = ({
-  onInput,
   onAddGoal,
 }: {
-  onInput: (enteredText: string) => void;
-  onAddGoal: (event: GestureResponderEvent) => void;
+  onAddGoal: (goalText: string) => void;
 }) => {
+  const [enteredGoalText, setEnteredGoalText] = useState<string>("");
+
+  function handleGoalInput(enteredText: string) {
+    setEnteredGoalText(enteredText);
+  }
+
+  function addGoalHandler() {
+    onAddGoal(enteredGoalText);
+    setEnteredGoalText("");
+  }
+
   return (
     <View style={styles.inputContainer}>
       <TextInput
-        onChangeText={onInput}
+        onChangeText={handleGoalInput}
         style={styles.textInput}
         placeholder="Your course goal!"
+        value={enteredGoalText}
       />
-      <Button onPress={onAddGoal} title="Add Goal" />
+      <Button onPress={addGoalHandler} title="Add Goal" />
     </View>
   );
 };
