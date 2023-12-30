@@ -1,7 +1,7 @@
 import { useState } from "react";
 import {
   Button,
-  GestureResponderEvent,
+  Modal,
   StyleSheet,
   TextInput,
   View,
@@ -9,8 +9,12 @@ import {
 
 const GoalInput = ({
   onAddGoal,
+  onCancel,
+  visible,
 }: {
   onAddGoal: (goalText: string) => void;
+  onCancel: Function;
+  visible: boolean;
 }) => {
   const [enteredGoalText, setEnteredGoalText] = useState<string>("");
 
@@ -24,35 +28,51 @@ const GoalInput = ({
   }
 
   return (
-    <View style={styles.inputContainer}>
-      <TextInput
-        onChangeText={handleGoalInput}
-        style={styles.textInput}
-        placeholder="Your course goal!"
-        value={enteredGoalText}
-      />
-      <Button onPress={addGoalHandler} title="Add Goal" />
-    </View>
+    <Modal visible={visible} animationType="slide">
+      <View style={styles.inputContainer}>
+        <TextInput
+          onChangeText={handleGoalInput}
+          style={styles.textInput}
+          placeholder="Your course goal!"
+          value={enteredGoalText}
+        />
+        <View style={styles.buttonContainer}>
+          <View style={styles.button}>
+            <Button title="Add Goal" onPress={addGoalHandler} />
+          </View>
+          <View style={styles.button}>
+            <Button title="Cancel" onPress={onCancel.bind(this)}></Button>
+          </View>
+        </View>
+      </View>
+    </Modal>
   );
 };
 
 const styles = StyleSheet.create({
   inputContainer: {
     flex: 1,
-    flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "center",
     alignItems: "center",
     marginBottom: 24,
+    padding: 16,
     borderBottomWidth: 1,
     borderBottomColor: "#cccccc",
   },
   textInput: {
     borderWidth: 1,
     borderColor: "#cccccc",
-    width: "70%",
-    marginRight: 8,
+    width: "100%",
     padding: 8,
   },
+  buttonContainer: {
+    marginTop: 16,
+    flexDirection: "row",
+  },
+  button: {
+    width: 100,
+    marginHorizontal: 8,
+  }
 });
 
 export default GoalInput;

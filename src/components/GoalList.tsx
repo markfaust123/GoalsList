@@ -1,12 +1,12 @@
 import { FlatList } from "react-native";
 import GoalItem from "./GoalItem";
 
-const GoalList = ({ courseGoals }: { courseGoals: Goal[] }) => {
+const GoalList = ({ courseGoals, handleDeleteGoal }: { courseGoals: Goal[], handleDeleteGoal: Function }) => {
     return (
       <FlatList
         data={courseGoals}
         renderItem={(itemData) => {
-          return <GoalItem content={itemData.item.text} />;
+          return <GoalItem goal={itemData.item} onDelete={handleDeleteGoal} />;
         }}
         keyExtractor={(item, index) => {
           return item.text + index;

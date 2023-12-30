@@ -1,4 +1,4 @@
 type Goal = {
-  key: string;
+  id: string;
   text: string;
 };
