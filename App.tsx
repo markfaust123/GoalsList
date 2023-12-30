@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button, StyleSheet, View } from "react-native";
 import GoalList from "./src/components/GoalList";
 import GoalInput from "./src/components/GoalInput";
+import { StatusBar } from "expo-status-bar";
 
 export default function App() {
   const [modalIsVisible, setModalIsVisible] = useState<boolean>(false);
@@ -30,16 +31,27 @@ export default function App() {
   }
 
   return (
-    <View style={styles.appContainer}>
-      <Button title="Add New Goal" color="#5e0acc" onPress={handleStartAddGoal}/>
-      <GoalInput onAddGoal={handleAddGoal} onCancel={handleEndAddGoal} visible={modalIsVisible} />
-      <View style={styles.goalsContainer}>
-        <GoalList
-          courseGoals={courseGoals}
-          handleDeleteGoal={handleDeleteGoal}
+    <>
+      <StatusBar style="light" />
+      <View style={styles.appContainer}>
+        <Button
+          title="Add New Goal"
+          color="#A872ED"
+          onPress={handleStartAddGoal}
         />
+        <GoalInput
+          onAddGoal={handleAddGoal}
+          onCancel={handleEndAddGoal}
+          visible={modalIsVisible}
+        />
+        <View style={styles.goalsContainer}>
+          <GoalList
+            courseGoals={courseGoals}
+            handleDeleteGoal={handleDeleteGoal}
+          />
+        </View>
       </View>
-    </View>
+    </>
   );
 }
 

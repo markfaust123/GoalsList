@@ -1,6 +1,7 @@
 import { useState } from "react";
 import {
   Button,
+  Image,
   Modal,
   StyleSheet,
   TextInput,
@@ -30,6 +31,10 @@ const GoalInput = ({
   return (
     <Modal visible={visible} animationType="slide">
       <View style={styles.inputContainer}>
+        <Image
+          source={require("../../assets/images/goal.png")}
+          style={styles.image}
+        />
         <TextInput
           onChangeText={handleGoalInput}
           style={styles.textInput}
@@ -38,10 +43,14 @@ const GoalInput = ({
         />
         <View style={styles.buttonContainer}>
           <View style={styles.button}>
-            <Button title="Add Goal" onPress={addGoalHandler} />
+            <Button
+              title="Cancel"
+              onPress={onCancel.bind(this)}
+              color="#f31282"
+            />
           </View>
           <View style={styles.button}>
-            <Button title="Cancel" onPress={onCancel.bind(this)}></Button>
+            <Button title="Add Goal" onPress={addGoalHandler} color="#9261D3" />
           </View>
         </View>
       </View>
@@ -54,16 +63,22 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: 24,
     padding: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: "#cccccc",
+    backgroundColor: "#311b6b",
+  },
+  image: {
+    width: 100,
+    height: 100,
+    margin: 20,
   },
   textInput: {
     borderWidth: 1,
-    borderColor: "#cccccc",
+    borderColor: "#e4d0ff",
+    backgroundColor: "#e4d0ff",
+    color: "#120438",
+    borderRadius: 6,
     width: "100%",
-    padding: 8,
+    padding: 16,
   },
   buttonContainer: {
     marginTop: 16,
@@ -72,7 +87,7 @@ const styles = StyleSheet.create({
   button: {
     width: 100,
     marginHorizontal: 8,
-  }
+  },
 });
 
 export default GoalInput;
